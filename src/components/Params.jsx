@@ -1,38 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import TableRow from "./TableRow";
+import { useDispatch } from "react-redux";
+import { setParmasData } from "../features/Api.Slice";
 
 const Params = () => {
+  const dispatch = useDispatch();
+  const [addRows, setAddRows] = useState([0]);
+
+  const [paramsData, setParamsData] = useState([]);
+
+  useEffect(() => {
+    dispatch(setParmasData(paramsData));
+  }, [dispatch, paramsData]);
+
   return (
     <div>
-        <h2>Query Params</h2>
-        <table className="w-full mt-5">
-          <thead>
-            <tr className="h-10">
-              <th className="border border-slate-400"></th>
-              <th className="border border-slate-400">Key</th>
-              <th className="border border-slate-400">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="h-12 w-full ">
-              <td className="border border-slate-400 w-20">
-                <input type="checkbox" className="w-full h-5" />
-              </td>
-              <td className="border border-slate-400 px-2">
-                <input
-                  type="text"
-                  className=" w-full border border-slate-400 focus:outline-none px-2 py-1.5"
-                />
-              </td>
-              <td className="border border-slate-400 px-2">
-                <input
-                  type="text"
-                  className="w-full border border-slate-400 focus:outline-none px-2 py-1.5"
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-    
+      <h2>Query Params</h2>
+      <table className="w-full mt-5">
+        <thead>
+          <tr className="h-10">
+            <th className="border border-slate-400"></th>
+            <th className="border border-slate-400">Key</th>
+            <th className="border border-slate-400">Value</th>
+          </tr>
+        </thead>
+        {addRows.map((row, index) => (
+          <TableRow
+            key={index}
+            setAddRows={setAddRows}
+            rowId={index}
+            data={paramsData}
+            setData={setParamsData}
+          />
+        ))}
+      </table>
     </div>
   );
 };

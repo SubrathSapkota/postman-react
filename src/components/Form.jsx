@@ -1,21 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setApiData } from "../features/Api.Slice";
+import { setFormData } from "../features/Api.Slice";
 
-const Form = () => {
+const Form = ({ sendApiHandler }) => {
   const dispatch = useDispatch();
 
   const [data, setData] = useState({
-    method: "GET",
+    method: "get",
     url: "",
   });
+
   const changeHandler = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  const clickHandler = () => {
-    dispatch(setApiData({ method: data.method, url: data.url }));
-  };
+  useEffect(() => {
+    dispatch(setFormData(data));
+  }, [dispatch, data]);
 
   return (
     <div className="flex gap-2">
@@ -26,8 +27,8 @@ const Form = () => {
         onChange={changeHandler}
         className="px-8 py-2 border-2 border-black/40 rounded text-xl"
       >
-        <option value="POST">POST</option>
-        <option value="GET">GET</option>
+        <option value="post">POST</option>
+        <option value="get">GET</option>
       </select>
       <input
         type="text"
@@ -38,7 +39,7 @@ const Form = () => {
       />
       <button
         className="px-10 py-2 bg-blue-500 text-white rounded text-2xl"
-        onClick={clickHandler}
+        onClick={sendApiHandler}
       >
         Send
       </button>

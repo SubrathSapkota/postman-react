@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Form from "./Form";
 import SelectTab from "./SelectTab";
 import { NavLink } from "react-router-dom";
 import Response from "./Response";
 import ErrorScreen from "./ErrorScreen";
+import { checkParams } from "../utils/CommonUtils";
+import { useSelector } from "react-redux";
+import ErrorMessage from "./ErrorMessage";
 
 const Home = () => {
+  const initialState = useSelector((state) => state.api);
+  const { formData, paramsData, headersData, bodyData } = initialState;
+
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onClickHanlderApiCall = () => {
+    if (
+      !checkParams({formData, paramsData, headersData, bodyData, setErrorMessage})
+    ) {
+      setError(true);
+      return false;
+    }
+  };
+
   return (
     <div className="max-w-screen-xl mx-auto">
       <div className=" mt-2 mb-20">
@@ -13,7 +31,12 @@ const Home = () => {
           POSTMAN
         </h1>
       </div>
-      <Form />
+      {error && (
+        <div className="z-50">
+          <ErrorMessage setError={setError} errorMessage={errorMessage} />
+        </div>
+      )}
+      <Form sendApiHandler={onClickHanlderApiCall} />
       <div className=" py-2 flex gap-5 ">
         <NavLink
           to="/"
