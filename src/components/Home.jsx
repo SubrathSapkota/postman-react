@@ -17,7 +17,6 @@ const Home = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [resonseError, setResponseError] = useState(false);
   const [apiResponse, setApiResponse] = useState({});
-  console.log(apiResponse);
 
   const onClickHanlderApiCall = async () => {
     if (

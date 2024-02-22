@@ -14,6 +14,15 @@ const Body = () => {
     dispatch(setBodyData(bodyText));
   }, [dispatch, bodyText]);
 
+  // useEffect(() => {
+  //   try {
+  //     const jsonData = JSON.parse(bodyText);
+  //     dispatch(setBodyData(jsonData));
+  //   } catch (error) {
+  //     dispatch(setBodyData(bodyText));
+  //   }
+  // }, [dispatch, bodyText]);
+
   return (
     <div>
       <h2>JOSN</h2>

@@ -1,17 +1,11 @@
 const checkValidJson = (text) => {
-  if (
-    /^[\],:{}\s]*$/.test(
-      text
-        .replace(/\\["\\\/bfnrtu]/g, "@")
-        .replace(
-          /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,
-          "]"
-        )
-        .replace(/(?:^|:|,)(?:\s*\[)+/g, "")
-    )
-  ) {
+  if (typeof text !== "string") {
+    return false;
+  }
+  try {
+    JSON.parse(text);
     return true;
-  } else {
+  } catch (error) {
     return false;
   }
 };
@@ -31,6 +25,7 @@ export const checkParams = ({
     setErrorMessage("Text not valid JSON");
     return false;
   }
+
   return true;
 };
 

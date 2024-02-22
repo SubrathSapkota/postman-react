@@ -12,6 +12,7 @@ export const getData = async ({
   const apiParams = getHeaderAndParams(parmasData);
   const apiHeaders = getHeaderAndParams(headersData);
 
+  console.log(bodyData);
   try {
     return await axios({
       method: apiType,
