@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableRow from "./TableRow";
 import { useDispatch } from "react-redux";
-import { setParmasData } from "../features/Api.Slice";
+import { setParmasData } from "../features/DataSlice";
 
 const Params = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const Params = () => {
   useEffect(() => {
     dispatch(setParmasData(paramsData));
   }, [dispatch, paramsData]);
+
 
   return (
     <div>

@@ -13,7 +13,6 @@ export const ApiSlice = createSlice({
   reducers: {
     setFormData: (state, action) => {
       state.formData = action.payload;
-      console.log(state.formData);
     },
     setParmasData: (state, action) => {
       state.parmasData = action.payload;

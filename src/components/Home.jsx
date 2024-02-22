@@ -7,20 +7,45 @@ import ErrorScreen from "./ErrorScreen";
 import { checkParams } from "../utils/CommonUtils";
 import { useSelector } from "react-redux";
 import ErrorMessage from "./ErrorMessage";
+import { getData } from "../service/api";
 
 const Home = () => {
   const initialState = useSelector((state) => state.api);
-  const { formData, paramsData, headersData, bodyData } = initialState;
+  const { formData, parmasData, headersData, bodyData } = initialState;
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [resonseError, setResponseError] = useState(false);
+  const [apiResponse, setApiResponse] = useState({});
+  console.log(apiResponse);
 
-  const onClickHanlderApiCall = () => {
+  const onClickHanlderApiCall = async () => {
     if (
-      !checkParams({formData, paramsData, headersData, bodyData, setErrorMessage})
+      !checkParams({
+        formData,
+        parmasData,
+        headersData,
+        bodyData,
+        setErrorMessage,
+      })
     ) {
       setError(true);
       return false;
+    }
+    let response = await getData({
+      formData,
+      parmasData,
+      headersData,
+      bodyData,
+    });
+
+    if (response === "error") {
+      setResponseError(true);
+      setApiResponse("")
+      return;
+    } else {
+      setApiResponse(response.data);
+      setResponseError(false);
     }
   };
 
@@ -64,8 +89,8 @@ const Home = () => {
         </NavLink>
       </div>
       <SelectTab />
-      <Response />
-      {/* <ErrorScreen/> */}
+
+      {resonseError ? <ErrorScreen /> : <Response response={apiResponse} />}
     </div>
   );
 };

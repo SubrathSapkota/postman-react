@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setFormData } from "../features/Api.Slice";
+import { setFormData } from "../features/DataSlice";
 
 const Form = ({ sendApiHandler }) => {
   const dispatch = useDispatch();

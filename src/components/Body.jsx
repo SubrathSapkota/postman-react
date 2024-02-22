@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setBodyData } from "../features/Api.Slice";
+import { setBodyData } from "../features/DataSlice";
 
 const Body = () => {
   const dispatch = useDispatch();

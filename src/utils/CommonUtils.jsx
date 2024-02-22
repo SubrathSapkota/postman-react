@@ -18,7 +18,7 @@ const checkValidJson = (text) => {
 
 export const checkParams = ({
   formData,
-  paramsData,
+  parmasData,
   headersData,
   bodyData,
   setErrorMessage,
@@ -32,4 +32,14 @@ export const checkParams = ({
     return false;
   }
   return true;
+};
+
+export const getHeaderAndParams = (headersData) => {
+  let obj = {};
+  headersData.forEach((data) => {
+    if (Object.prototype.hasOwnProperty.call(data, "check") && data.check) {
+      obj = { ...obj, [data.key]: data.value };
+    }
+  });
+  return obj;
 };

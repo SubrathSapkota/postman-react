@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableRow from "./TableRow";
 import { useDispatch } from "react-redux";
-import { setHeadersDatas } from "../features/Api.Slice";
+import { setHeadersDatas } from "../features/DataSlice";
 
 const Headers = () => {
   const dispatch = useDispatch();

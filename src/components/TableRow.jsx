@@ -9,10 +9,10 @@ const TableRow = ({ setAddRows, rowId, data, setData }) => {
     if (!checkignCheckbox) {
       setCheckignCheckbox(true);
       setAddRows((oldArr) => [...oldArr, rowId]);
-      result = { ...result, check: true };
+      result = { ...result, id: rowId, check: true };
     } else {
       setCheckignCheckbox(false);
-      result = { ...result, check: false };
+      result = { ...result, id: rowId, check: false };
     }
 
     let index = data.findIndex((value) => value.id === rowId);
